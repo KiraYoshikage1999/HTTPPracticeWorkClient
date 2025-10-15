@@ -7,7 +7,7 @@ namespace HTTPPracticeWorkClient
 {
     public partial class Form1 : Form
     {
-        readonly string pattern = @"^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$";
+        readonly string pattern = @"^(https):\/\/[^\s/$.?#].[^\s]*$";
         readonly string domein = "http://localhost:8080/";
         HttpClient client;
         HttpListener httpListener;
