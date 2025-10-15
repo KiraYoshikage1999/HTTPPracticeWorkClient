@@ -32,9 +32,9 @@ namespace HTTPPracticeWorkClient
                     byte[] buffer = Encoding.UTF8.GetBytes(input);
                     HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, input);
                     await client.SendAsync(request);
-                    HttpResponseMessage response = await client.GetAsync(domein);
+                    HttpResponseMessage response = await client.GetAsync(input);
                     response.EnsureSuccessStatusCode();
-                    byte[] bytes = await  response.Content.ReadAsByteArrayAsync();
+                    byte[] bytes = await response.Content.ReadAsByteArrayAsync();
                     string htmlContent = Encoding.UTF8.GetString(bytes);
 
                     //byte[] bytes = await client.GetAsync(domein);
