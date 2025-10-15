@@ -7,7 +7,7 @@ namespace HTTPPracticeWorkClient
 {
     public partial class Form1 : Form
     {
-        readonly string pattern = @"^(https):\/\/[^\s/$.?#].[^\s]*$";
+        readonly string pattern = @"^(https?):\/\/[^\s/$.?#].[^\s]*$";
         readonly string domein = "http://localhost:8080/";
         HttpClient client;
         HttpListener httpListener;
@@ -33,10 +33,13 @@ namespace HTTPPracticeWorkClient
                     HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, input);
                     await client.SendAsync(request);
                     HttpResponseMessage response = await client.GetAsync(domein);
-                    
+                    response.EnsureSuccessStatusCode();
+                    byte[] bytes = await  response.Content.ReadAsByteArrayAsync();
+                    string htmlContent = Encoding.UTF8.GetString(bytes);
+
                     //byte[] bytes = await client.GetAsync(domein);
-                    
-                    AnswerTextBox.Text = response.ToString();
+
+                    AnswerTextBox.Text = htmlContent.ToString();
 
                 }
                 else
